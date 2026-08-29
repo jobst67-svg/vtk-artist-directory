@@ -1,0 +1,9 @@
+VTK Artist 0.1.1 – zentrale Content-Grundlage
+
+Die Migration ergänzt gemeinsame Tabellen für Artist-Profile, Songs und Releases.
+Sie nutzt dieselben Supabase-Benutzer und schützt private Datensätze über RLS.
+
+Migration:
+docs/reference/SUPABASE_ARTIST_CONTENT_v0.1.sql
+
+Die Migration im gemeinsamen Supabase-Projekt einmal im SQL Editor ausführen.
