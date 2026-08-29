@@ -1,5 +1,6 @@
 {
+  "version": 2,
+  "buildCommand": "node node_modules/vinext/dist/cli.js build",
   "framework": null,
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist/client"
+  "rewrites": [{ "source": "/(.*)", "destination": "/api/index" }]
 }
