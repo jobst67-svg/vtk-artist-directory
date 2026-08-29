@@ -14,9 +14,8 @@ const artists = [
   { name: "Seelenwelt Musik", handle: "@seelenwelt", genre: "Ambient · Healing", initials: "SW", tone: "from-indigo-700 to-cyan-700", followers: "219", bio: "Atmospheric sounds for quiet moments.", avatarUrl: "", youtubeUrl: "", spotifyUrl: "", sunoUrl: "" },
 ];
 const posts = [
-  { artist: "Voito Taikuma", handle: "@voitotaikuma", initials: "VT", time: "vor 2 Stunden", title: "The Notorious R", text: "Ein neuer Rockabilly-Trip mit rollendem R, rauem Groove und einer großen Portion Riverboat-Atmosphäre.", tags: ["Rockabilly", "New release"], tone: "from-red-700 to-amber-600" },
-  { artist: "Bulldog TMC", handle: "@bulldogtmc", initials: "BT", time: "gestern", title: "The Ground Has Teeth", text: "Deathcore trifft industrielle Spannung: schwer, direkt und ohne unnötigen Glanz.", tags: ["Deathcore", "Heavy music"], tone: "from-neutral-800 to-red-950" },
-];
+  { artist: "Voito Taikuma", handle: "@voitotaikuma", initials: "VT", time: "vor 2 Stunden", title: "The Notorious R", textDE: "Ein neuer Rockabilly-Trip mit rollendem R, rauem Groove und einer großen Portion Riverboat-Atmosphäre.", textEN: "A new rockabilly trip with a rolling R, a rough groove and a generous dose of riverboat atmosphere.", tags: ["Rockabilly", "New release"], tone: "from-red-700 to-amber-600" },
+  { artist: "Bulldog TMC", handle: "@bulldogtmc", initials: "BT", time: "gestern", title: "The Ground Has Teeth", textDE: "Deathcore trifft industrielle Spannung: schwer, direkt und ohne unnötigen Glanz.", textEN: "Deathcore meets industrial tension: heavy, direct and without unnecessary polish.", tags: ["Deathcore", "Heavy music"], tone: "from-neutral-800 to-red-950" },
 
 const copy = (language: "EN" | "DE") => language === "DE" ? { community: "COMMUNITY", account: "KONTO", feed: "Feed", artists: "Künstler", songs: "Songs", releases: "Veröffentlichungen", profile: "Mein Profil", admin: "Admin", help: "Hilfe & FAQ", search: "Künstler, Songs, Veröffentlichungen suchen...", songStudio: "Song Studio öffnen", releaseStudio: "Release Studio öffnen" } : { community: "COMMUNITY", account: "ACCOUNT", feed: "Feed", artists: "Artists", songs: "Songs", releases: "Releases", profile: "My profile", admin: "Admin", help: "Help & FAQ", search: "Search artists, songs, releases...", songStudio: "Open Song Studio", releaseStudio: "Open Release Studio" };
 
