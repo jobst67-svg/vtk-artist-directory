@@ -18,6 +18,8 @@ const posts = [
   { artist: "Bulldog TMC", handle: "@bulldogtmc", initials: "BT", time: "gestern", title: "The Ground Has Teeth", text: "Deathcore trifft industrielle Spannung: schwer, direkt und ohne unnötigen Glanz.", tags: ["Deathcore", "Heavy music"], tone: "from-neutral-800 to-red-950" },
 ];
 
+const copy = (language: "EN" | "DE") => language === "DE" ? { community: "COMMUNITY", account: "KONTO", feed: "Feed", artists: "Künstler", songs: "Songs", releases: "Veröffentlichungen", profile: "Mein Profil", admin: "Admin", help: "Hilfe & FAQ", search: "Künstler, Songs, Veröffentlichungen suchen...", songStudio: "Song Studio öffnen", releaseStudio: "Release Studio öffnen" } : { community: "COMMUNITY", account: "ACCOUNT", feed: "Feed", artists: "Artists", songs: "Songs", releases: "Releases", profile: "My profile", admin: "Admin", help: "Help & FAQ", search: "Search artists, songs, releases...", songStudio: "Open Song Studio", releaseStudio: "Open Release Studio" };
+
 function AdminProfiles({ profiles, onDelete, onEdit, onCreate }: { profiles: Array<{ user_id: string; display_name: string | null; nickname: string | null; avatar_url: string | null }>; onDelete: (id: string) => void; onEdit: (id: string) => void; onCreate: () => void }) {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [query, setQuery] = useState("");
@@ -28,6 +30,7 @@ function AdminProfiles({ profiles, onDelete, onEdit, onCreate }: { profiles: Arr
 export default function Home() {
   const [active, setActive] = useState("Feed");
   const [language, setLanguage] = useState<"EN" | "DE">("EN");
+  const text = copy(language);
   const [selectedArtist, setSelectedArtist] = useState<(typeof artists)[number] | null>(null);
   const [liveArtists, setLiveArtists] = useState<typeof artists>([]);
   const goToSection = (item: string, target?: string) => { setActive(item); setAdminOpen(false); setSelectedArtist(null); setTimeout(() => { const node = target ? document.getElementById(target) : item === "My profile" ? document.querySelector(".profile-card") : document.querySelector(".artist-heading"); node?.scrollIntoView({ behavior: "smooth", block: "start" }); }, 0); };
@@ -72,7 +75,7 @@ export default function Home() {
     <aside className="artist-sidebar">
       <a className="artist-logo" href="#top"><span>VTK</span><strong>ARTIST</strong></a>
       <nav><p>{language === "DE" ? "COMMUNITY" : "COMMUNITY"}</p>{[["Feed", "latest-feed"], [language === "DE" ? "Künstler" : "Artists", "featured-artists"], [language === "DE" ? "Songs" : "Songs", "latest-feed"], [language === "DE" ? "Releases" : "Releases", "latest-feed"]].map(([item, target]) => <button type="button" key={item} className={active === item ? "active" : ""} onClick={() => goToSection(item, target)}><span>{item === "Feed" ? "◈" : item === (language === "DE" ? "Künstler" : "Artists") ? "◎" : item === "Songs" ? "♫" : "▣"}</span>{item}</button>)}<p className="space">{language === "DE" ? "KONTO" : "ACCOUNT"}</p><button type="button" className={active === "My profile" ? "active" : ""} onClick={() => goToSection("My profile")}><span>◌</span>{language === "DE" ? "Mein Profil" : "My profile"}</button>{isAdmin && <button type="button" className={adminOpen ? "active" : ""} onClick={() => { setAdminOpen(true); setSelectedArtist(null); }}><span>⚙</span>Admin</button>}</nav>
-      <div className="sidebar-bottom"><button className="help"><span>?</span>Help &amp; FAQ</button><small>VTK ARTIST · BETA 0.1.0</small></div>
+      <div className="sidebar-studios"><p className="space">VTK STUDIOS</p><a className="studio-link" href="https://vtk-song-studio.com" target="_blank" rel="noreferrer"><span>♫</span>{text.songStudio}</a><a className="studio-link" href="https://release.vtk-song-studio.com" target="_blank" rel="noreferrer"><span>▣</span>{text.releaseStudio}</a></div><div className="sidebar-bottom"><button className="help"><span>?</span>{text.help}</button><small>VTK ARTIST · BETA 0.1.0</small></div>
     </aside>
     <main id="top" className="artist-main">
       <header className="artist-topbar"><label className="artist-search"><span>⌕</span><input placeholder={language === "DE" ? "Künstler, Songs, Releases suchen..." : "Search artists, songs, releases..."} /></label><div className="top-actions"><button type="button" className={`language ${language === "EN" ? "active" : ""}`} onClick={() => setLanguage("EN")}>EN</button><button type="button" className={`language ${language === "DE" ? "active" : ""}`} onClick={() => setLanguage("DE")}>DE</button>{userEmail ? <button type="button" className="sign-in" onClick={signOut}>{language === "DE" ? "Abmelden" : "Sign out"}</button> : <button type="button" className="sign-in" onClick={() => setLoginOpen(true)}>{language === "DE" ? "Anmelden" : "Sign in"}</button>}<button type="button" className="avatar" aria-label="Open account" onClick={() => userEmail ? goToSection("My profile") : setLoginOpen(true)}>VTK</button></div></header>
