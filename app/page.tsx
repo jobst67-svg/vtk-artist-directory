@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 
 const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL
+  process.env.NEXT_PUBLIC_SUPABASE_URL || "https://mgsbkmyrxrgzbegqipsg.supabase.co",
   process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || "sb_publishable_AxpRo2RQETwNljCzS3kX7A_UdAeCvnW"
+);
 );
 const profileImageUrl = (value: string | null | undefined) => { if (!value) return ""; if (/^https?:\/\//i.test(value)) return value; const { data } = supabase.storage.from("vtk-artist-profiles").getPublicUrl(value.replace(/^\/+/, "")); return data.publicUrl; };
 
